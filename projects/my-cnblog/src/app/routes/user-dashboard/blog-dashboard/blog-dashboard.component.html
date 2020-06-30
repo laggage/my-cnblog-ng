@@ -1,0 +1,63 @@
+<div nz-row>
+    <div nz-col
+         [nzSpan]="8">
+        <nz-card [nzExtra]="userAvatar"
+                 [nzTitle]="user && user.userName"
+                 *ngIf="user && user.blog">
+            <p>
+                <span class="icon-font">
+                    &#xe600;
+                    <strong>注册日: </strong>
+                </span>
+                <span> {{ user && user.registerDate && user.registerDate | date:'yyyy MM-dd' }} </span>
+            </p>
+            <p> <span class="icon-font">&#xe600; <strong> 开博日:</strong></span>
+                <strong>{{user.blog.openDate|date:'yyyy MM-dd'}}</strong> </p>
+            <p> <span class="icon-font">&#xe603; <strong>邮箱: </strong> </span>
+                <span> <strong> {{ user.email || '还没有填写邮箱信息' }} </strong> </span>
+            </p>
+            <p>
+                <span class="icon-font"
+                      [style.color]="user && (user.sex == 1 ? 'blue':(user.sex == 2 ? 'pink' : 'gray'))">
+                    &#xe60f;
+                    <strong>性别: </strong>
+                </span>
+                <span> {{ user.sex == 1 ? '男' : (user.sex == 2 ? '女' : '未知') }} </span>
+            </p>
+        </nz-card>
+    </div>
+
+    <div [nzOffset]="1"
+         nz-col
+         [nzSpan]="8">
+        <div nz-row
+             nzAlign="middle"
+             *ngIf="user && user.blog">
+            <nz-card nz-col
+                     [nzSpan]="24">
+                <p>
+                    <nz-statistic [nzValue]="(user.blog.totalPostsCount | number)!"
+                                  [nzTitle]="'一共写了'"
+                                  [nzSuffix]="'篇博文'"></nz-statistic>
+                </p>
+            </nz-card>
+
+            <nz-card nz-col
+                     [nzSpan]="24">
+                <p>
+                    <nz-statistic [nzValue]="(user.blog.totalCommentsCount | number)!"
+                                  [nzTitle]="'一共收到'"
+                                  [nzSuffix]="'个回复'"></nz-statistic>
+                </p>
+            </nz-card>
+        </div>
+
+    </div>
+</div>
+
+
+
+<ng-template #userAvatar>
+    <nz-avatar [nzSrc]="user && user.avatarUrl"
+               nzIcon="user"></nz-avatar>
+</ng-template>

@@ -1,0 +1,18 @@
+<div class="post-list">
+
+    <div *ngFor="let post of posts"
+         class="post-item-wrapper">
+        <app-post-item [post]="post"></app-post-item>
+    </div>
+
+    <div *ngIf="showPagiantion"
+         class="post-list-pagination">
+        <nz-pagination (nzPageIndexChange)="onPageIndexChanged($event)"
+                       (nzPageSizeChange)="onPageSizeChanged($event)"
+                       [nzPageIndex]="pageIndex"
+                       [nzTotal]="totalItemsCount"
+                       nzShowSizeChanger
+                       [nzPageSize]="pageSize"></nz-pagination>
+        <br />
+    </div>
+</div>

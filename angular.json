@@ -1,6 +1,135 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "my-cnblog": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/my-cnblog",
+      "sourceRoot": "projects/my-cnblog/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/my-cnblog",
+            "index": "projects/my-cnblog/src/index.html",
+            "main": "projects/my-cnblog/src/main.ts",
+            "polyfills": "projects/my-cnblog/src/polyfills.ts",
+            "tsConfig": "projects/my-cnblog/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/my-cnblog/src/favicon.ico",
+              "projects/my-cnblog/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "projects/my-cnblog/src/theme.less",
+              "projects/my-cnblog/src/styles.css",
+              "projects/my-cnblog/src/assets/editor.md/css/editormd.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/editor.md/editormd.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/my-cnblog/src/environments/environment.ts",
+                  "with": "projects/my-cnblog/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-cnblog:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-cnblog:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-cnblog:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-cnblog/src/test.ts",
+            "polyfills": "projects/my-cnblog/src/polyfills.ts",
+            "tsConfig": "projects/my-cnblog/tsconfig.spec.json",
+            "karmaConfig": "projects/my-cnblog/karma.conf.js",
+            "assets": [
+              "projects/my-cnblog/src/favicon.ico",
+              "projects/my-cnblog/src/assets"
+            ],
+            "styles": [
+              "projects/my-cnblog/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-cnblog/tsconfig.app.json",
+              "projects/my-cnblog/tsconfig.spec.json",
+              "projects/my-cnblog/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/my-cnblog/e2e/protractor.conf.js",
+            "devServerTarget": "my-cnblog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "my-cnblog:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-cnblog"
 }

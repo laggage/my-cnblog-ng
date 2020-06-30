@@ -1,0 +1,19 @@
+<blog-layout-header></blog-layout-header>
+
+<main>
+    <div nz-row
+         nzAlign="top"
+         [nzGutter]="32">
+        <div id="content"
+             nz-col
+             [nzSpan]="16">
+            <router-outlet>
+            </router-outlet>
+        </div>
+        <div id="sidebar"
+             nz-col
+             [nzSpan]="8" class="box-shadow">
+            <blog-layout-sidebar ></blog-layout-sidebar>
+        </div>
+    </div>
+</main>

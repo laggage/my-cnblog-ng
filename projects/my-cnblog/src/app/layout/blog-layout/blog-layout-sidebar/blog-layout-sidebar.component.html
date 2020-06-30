@@ -1,0 +1,69 @@
+<div>
+    <nz-space nzDirection="vertical" style="width: 100%;">
+        <nz-space-item>
+            <div nz-row
+                 *ngIf="blog && blog.blogger && blog.blogger.avatarUrl"
+                 nzAlign="middle"
+                 nzGutter="16">
+                <div nz-col>
+                    <nz-avatar [nzSize]="48"
+                               nzIcon="user"
+                               [nzSrc]="blog && blog.blogger && blog.blogger.avatarUrl"></nz-avatar>
+                </div>
+                <div nz-col>
+                    <h1 style="margin-bottom: 0;">{{ blog.blogger.userName }}</h1>
+                </div>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <div nz-row>
+                <div *ngIf="blog">
+                    <p style="margin-bottom: 0;"> {{ blog.sign }} </p>
+                </div>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <div nz-row
+                 *ngIf="blogAge">
+                <div>
+                    <span class="icon-font">&#xe612; 博龄: </span>
+                    <strong>
+                        <span *ngIf="blogAge.year > 0">{{ blogAge.year }}年</span>
+                        <span *ngIf="blogAge.month > 0">{{blogAge.month}}月</span>
+                        <span *ngIf="blogAge.date > 0">{{blogAge.date}}天</span>
+                        <span *ngIf="blogAge.hour > 0">{{blogAge.hour}}小时</span>
+                    </strong>
+                </div>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <div nz-row [nzGutter]="16" *ngIf="blog">
+                <div nz-col
+                     [nzSpan]="12">
+                    <nz-card>
+                        <nz-statistic [nzValue]="(blog.totalPostsCount | number: '1.0-2')!"
+                                      [nzTitle]="'Total posts count'"
+                                      [nzValueStyle]="{ color: '#3F8600' }">
+                        </nz-statistic>
+                        <!-- <ng-template #prefixTplOne><i nz-icon
+                               nzType="arrow-up"></i></ng-template> -->
+                    </nz-card>
+                </div>
+
+                <div nz-col
+                     [nzSpan]="12">
+                    <nz-card>
+                        <nz-statistic [nzValue]="(blog.totalCommentsCount | number: '1.0-2')!"
+                                      [nzTitle]="'Total comment count'"
+                                      [nzValueStyle]="{ color: '#3F8600' }">
+                        </nz-statistic>
+                    </nz-card>
+                </div>
+            </div>
+        </nz-space-item>
+
+    </nz-space>
+</div>

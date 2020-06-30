@@ -1,0 +1,86 @@
+<nz-layout class="h-100">
+    <nz-header>
+        <div id="title">
+            <h1>用户中心</h1>
+        </div>
+        <ul nz-menu
+            nzTheme="dark"
+            nzMode="horizontal"
+            class="header-menu"
+            *ngIf="user && user.blog">
+            <li nz-menu-item
+                nzSelected="false">
+                <a [routerLink]="['/blog/'+user.blog.id+'/posts/']">
+                    <nz-avatar class="bd-white"
+                               [nzSrc]="user && user.avatarUrl"
+                               [nzSize]="48"></nz-avatar>
+                </a>
+            </li>
+            <li nz-menu-item
+                [nzSelected]> <a routerLinkActive
+                   routerLink="/"> 主站 </a>
+            </li>
+            <li nz-menu-item> <a [routerLink]="['/blog/'+user.blog.id+'/posts/']"> 我的博客 </a> </li>
+            <li nz-menu-item
+                class="danger"
+                (click)="logout()"> <a nzDanger
+                   style="color: #fff;"> 注销 </a> </li>
+        </ul>
+    </nz-header>
+    <nz-layout>
+        <nz-sider nzWidth="200px"
+                  nzTheme="light">
+            <ul nz-menu
+                class="side-menu"
+                nzMode="inline">
+                <li nz-submenu
+                    nzOpen
+                    nzIcon="tablet"
+                    nzTitle="博文管理">
+                    <ul>
+                        <li nz-menu-item
+                            nzIcon="edit"
+                            nzMatchRouter>
+                            <i nz-icon
+                               nzType="dashboard"
+                               nzTheme="fill"></i>
+                            <a routerLink="./dashboard">仪表盘</a>
+                        </li>
+                        <li nz-menu-item
+                            nzMatchRouter>
+                            <i nz-icon
+                               nzType="edit"></i>
+                            <a routerLink="./post/write"> 写博文 </a>
+                        </li>
+                        <li nz-menu-item
+                            nzMatchRouter>
+                            <i nz-icon
+                               nzType="edit"></i>
+                            <a routerLink="./posts"> 博文列表 </a>
+                        </li>
+                    </ul>
+                </li>
+                <li nz-menu-item
+                    nzMatchRouter>
+                    <i nz-icon
+                       nzType="user"></i>
+                    <a routerLink="./userInfo">个人信息</a>
+                </li>
+            </ul>
+        </nz-sider>
+
+        <nz-layout class="inner-layout">
+            <!-- <nz-breadcrumb>
+                <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+                <nz-breadcrumb-item>List</nz-breadcrumb-item>
+                <nz-breadcrumb-item>App</nz-breadcrumb-item>
+            </nz-breadcrumb> -->
+            <nz-content>
+                <div>
+                    <router-outlet></router-outlet>
+                </div>
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+
+</nz-layout>

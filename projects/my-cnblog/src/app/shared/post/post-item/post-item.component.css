@@ -1,0 +1,48 @@
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.post-item {
+    background: #fff;
+    padding: .6rem 1rem;
+    display: block;
+    width: 100%;
+}
+.avatar {
+    margin-left: 1rem;
+}
+
+.post-item-header h1 {
+    margin-bottom: 0;
+}
+
+.post-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding-bottom: .6rem;
+    margin-bottom: .6rem;
+}
+
+.post-item-detail {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    margin-bottom: .6rem;
+}
+
+.post-item-detail>div:not(:last-child) {
+    margin-right: .5rem;
+}
+
+nz-avatar {
+    user-select: none;
+}
+
+.post-item-tags {
+    margin-bottom: 1rem;
+}

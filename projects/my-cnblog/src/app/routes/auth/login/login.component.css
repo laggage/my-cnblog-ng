@@ -1,0 +1,30 @@
+:host {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#login-avatar {
+    margin-bottom: 1rem;
+}
+
+#login-avatar nz-avatar {
+    margin: 0 auto;
+    display: block;
+}
+
+.login-form-container {
+    padding: 1rem;
+    padding-top: 1rem;
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+form>nz-form-item {
+    width: auto;
+}
+
+
+.login-form-container {
+    background: #fff;
+}

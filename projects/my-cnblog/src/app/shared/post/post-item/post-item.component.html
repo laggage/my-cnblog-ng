@@ -1,0 +1,54 @@
+<div class="post-item box-shadow">
+    <div class="post-item-header">
+        <h1 class="post-item-title">
+            <a (click)="onGotoPostDetail()">{{ post.title }} </a>
+        </h1>
+        <a [routerLink]="['/blog/'+post.blog.id+'/posts']">
+            <nz-avatar class="flex-shrink-0 avatar"
+                       nzSize="16"
+                       [nzSrc]="post.author.avatarUrl"></nz-avatar>
+        </a>
+
+    </div>
+
+    <div class="post-item-detail">
+        <div class="post-author">
+            <span>
+                <span><span class="icon-font">&#xe62b;</span></span>
+            </span>
+            <span> {{post.author.userName}} </span>
+        </div>
+        <div class="post-create-date">
+            <span> <span class="icon-font">&#xe610;</span> </span>
+            <span> {{postCreateDate|date:'yyyy-MM-dd HH:mm'}} </span>
+        </div>
+        <div *ngIf="showLastModified"
+             class="post-last-modified">
+            <span></span>
+            <span> {{ post.lastModified|date:'yyyy-MM-dd HH:mm' }} </span>
+        </div>
+    </div>
+
+    <div class="post-item-description">
+        <p nz-typography>
+            {{ post.description }}
+        </p>
+    </div>
+
+    <div class="post-item-tags" *ngIf="post && post.tags">
+        <span *ngFor="let tag of post.tags"> <nz-tag [nzColor]="tag.tagColor">{{ tag.name }}</nz-tag> </span>
+    </div>
+
+    <div class="post-item-statistic"
+         nz-row
+         nzGutter="16">
+        <div nz-col>
+            <span class="icon-font">&#xe632; </span>
+            <span>Viewed( {{post.viewCount}} )</span>
+        </div>
+        <div nz-col>
+            <span class="icon-font">&#xe9cb; </span>
+            <span>Commented( {{post.commentsCount}} )</span>
+        </div>
+    </div>
+</div>

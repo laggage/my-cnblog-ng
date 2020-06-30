@@ -1,0 +1,5 @@
+<app-post-list [posts]="posts"
+               [pageIndex]="pageInfo.pageIndex"
+               [pageSize]="pageInfo.pageSize"
+               [totalItemsCount]="pageInfo.totalItemsCount"
+               (pageChanged)="pageChanged($event)"></app-post-list>

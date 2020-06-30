@@ -1,0 +1,38 @@
+<header id="header">
+    <div class="header-logo">
+        <h1 class="art-title">
+            <a routerLink="/app/index">{{title}}</a>
+        </h1>
+    </div>
+    <ng-template #suffixIconSearch>
+        <i nz-icon
+           id="search-box-icon"
+           nzType="search"
+           nzSearch="true"></i>
+    </ng-template>
+    <div class="header-search-box">
+        <div id="header-search">
+            <nz-input-group [nzSuffix]="suffixIconSearch">
+                <input nz-input
+                       type="text"
+                       placeholder="search...">
+            </nz-input-group>
+        </div>
+    </div>
+    <div class="header-user">
+        <div *ngIf="!user">
+            <nz-space>
+                <nz-space-item>
+                    <a [routerLink]="['./login', { callback: 'app/index' }]"
+                       nzType="primary"
+                       nz-button>登录</a>
+                </nz-space-item>
+                <nz-space-item>
+                    <a nz-button routerLink="./register">注册</a>
+                </nz-space-item>
+            </nz-space>
+        </div>
+        <layout-header-user *ngIf="user"
+                            [user]="user"></layout-header-user>
+    </div>
+</header>

@@ -1,0 +1,8 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+#btn-logout {
+    margin-top: 1rem;
+}

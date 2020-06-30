@@ -1,0 +1,52 @@
+<nz-comment *ngIf="user">
+    <nz-avatar nz-comment-avatar
+               nzIcon="user"
+               [nzSrc]="user.avatarUrl"></nz-avatar>
+    <nz-comment-content>
+        <nz-form-item>
+            <textarea nz-input
+                      rows="4"></textarea>
+        </nz-form-item>
+        <nz-form-item>
+            <button nz-button
+                    nzType="primary">
+                Add Comment
+            </button>
+        </nz-form-item>
+    </nz-comment-content>
+</nz-comment>
+
+<nz-space class="w-100" [nzDirection]="'vertical'">
+    <nz-space-item>
+        <nz-alert *ngIf="!user" nzType="info"
+          nzMessage="登录后方可评论"></nz-alert>
+    </nz-space-item>
+    <nz-space-item>
+        <nz-space>
+            <nz-space-item>
+                <span> <a [routerLink]="['/app/login', {callback: '.'}]">去登陆</a> </span>
+            </nz-space-item>
+            <nz-space-item>
+                <span> <a [routerLink]="['/app/register', {callback: '.'}]">去注册</a> </span>
+            </nz-space-item>
+        </nz-space>
+    </nz-space-item>
+</nz-space>
+
+<nz-list *ngIf="comments.length"
+         [nzDataSource]="comments"
+         [nzRenderItem]="item"
+         [nzItemLayout]="'horizontal'">
+    <ng-template #item
+                 let-item>
+        <nz-comment [nzAuthor]="item.user.userName"
+                    [nzDatetime]="item.postedTime">
+            <nz-avatar nz-comment-avatar
+                       nzIcon="user"
+                       [nzSrc]="item.user.avatarUrl"></nz-avatar>
+            <nz-comment-content>
+                <p>{{ item.comment }}</p>
+            </nz-comment-content>
+        </nz-comment>
+    </ng-template>
+</nz-list>

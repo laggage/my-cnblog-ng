@@ -1,0 +1,49 @@
+<div class="post-detail box-shadow">
+    <div *ngIf="post">
+        <div class="post-title mb-1">
+            <h1> {{post.title}} </h1>
+        </div>
+        <div class="post-info mb-1">
+            <div nz-row
+                 [nzGutter]="8"
+                 nzAlign="middle">
+                <div nz-col
+                     class="flex-align-center">
+                    <span>
+                        <nz-avatar [nzSize]="24"
+                                   [nzSrc]="post.author && post.author.avatarUrl"></nz-avatar>
+                    </span>
+                    <span style="font-size: 18px;">
+                        <strong>&nbsp;{{post.author.userName}}</strong>
+                    </span>
+                </div>
+
+                <div nz-col>
+                    <span class="icon-font">&#xe610;</span>
+                    <span> {{post.createDate|date:'yyyy MM-dd HH:mm'}} </span>
+                </div>
+
+                <div nz-col>
+                    <span class="icon-font">&#xe632;</span>
+                    <span> {{post.viewCount}} </span>
+                </div>
+
+                <div nz-col>
+                    <span class="icon-font">&#xe9cb;</span>
+                    <span> {{post.commentsCount}} </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-body mb-1">
+            {{postContent}}
+        </div>
+    </div>
+</div>
+
+
+<div class="comment">
+
+    <blog-post-comment [postId]="post && post.id"></blog-post-comment>
+
+</div>

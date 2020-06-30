@@ -1,0 +1,22 @@
+<div>
+    <div nz-row
+         class="mb-1">
+        <div nz-col
+             nzOffset="2">
+            <h2>新建博文</h2>
+        </div>
+    </div>
+    <div>
+        <app-post-editor [post]="post"
+                         (submitted)="addPost($event)"></app-post-editor>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="confirmVisible"
+          nzTitle="Modal"
+          nzOkText="确定"
+          nzCancelText="取消"
+          (nzOnOk)="handleConfirm()"
+          (nzOnCancel)="handleCancel()">
+    <p>确定要离开这个页面嘛? 数据不会保存!</p>
+</nz-modal>

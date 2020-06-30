@@ -1,0 +1,19 @@
+<header class="box-shadow">
+    <div nz-row
+         nzJustify="space-between"
+         class="h-100"
+         nzAlign="middle"
+         id="header-container">
+        <div [nzSpan]="6"
+             nz-col>
+            <h1 id="blog-title"
+                class="art-title"> <a *ngIf="blog && blog.blogger"
+                   [routerLink]="'/blog/'+blog.blogger.id+'/posts'">
+                    {{ blog && blog.blogger && blog.blogger.userName +'的博客' }}
+                </a> </h1>
+        </div>
+        <div nz-col>
+            <a routerLink="/">去主站</a>
+        </div>
+    </div>
+</header>

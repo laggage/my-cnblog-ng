@@ -1,0 +1,34 @@
+<div>
+    <nz-avatar [nzSize]="56"
+               nzIcon="user"
+               [nzSrc]="user && user.avatarUrl ? user.avatarUrl:''"
+               nz-popover
+               [nzPopoverTitle]="user.userName"
+               [nzPopoverContent]="userProfile"></nz-avatar>
+</div>
+
+<ng-template #userProfile>
+    <div>
+        <ul class="list-none">
+            <li>
+                <a [routerLink]="'/blog/'+user.blog.id+'/posts'">
+                    我的博客
+                </a>
+            </li>
+            <li>
+                <a routerLink="/userCenter/">
+                    我的博客后台
+                </a>
+            </li>
+            <li>
+                <a (click)="logout()" 
+                nz-button
+                   nzDanger
+                   routerLink="/"
+                   id="btn-logout">
+                    登出
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-template>

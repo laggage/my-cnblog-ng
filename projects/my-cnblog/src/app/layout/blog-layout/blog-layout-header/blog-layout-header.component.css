@@ -1,0 +1,22 @@
+:host {
+    display: block;
+    /* width: 100vw; */
+    overflow: visible;
+    height: var(--header-height);
+    margin-bottom: var(--header-mb);
+    background: #fff;
+}
+
+#header-container {
+    width: var(--main-width);
+    margin: 0 auto;
+}
+
+header {
+    height: 100%;
+    margin: 0 auto;
+}
+
+#blog-title {
+    margin-bottom: 0;
+}

@@ -1,0 +1,121 @@
+<div>
+
+
+    <form [formGroup]="registerForm"
+          nz-form>
+        <div>
+            <h1>用户注册</h1>
+        </div>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8"
+                           for="userName"
+                           nzRequired>用户名</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+                <nz-input-group nzPrefixIcon="user">
+                    <input nz-input
+                           formControlName="userName"
+                           name="userName"
+                           type="userName"
+                           id="userName"
+                           placeholder="输入用户名">
+                </nz-input-group>
+
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8"
+                           for="userName"
+                           nzRequired>密码</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input nzRequired
+                           nz-input
+                           formControlName="password"
+                           name="password"
+                           type="password"
+                           id="password"
+                           placeholder="输入密码">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8"
+                           for="userName"
+                           nzRequired>邮箱</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input nz-input
+                           formControlName="email"
+                           name="email"
+                           type="email"
+                           id="email"
+                           placeholder="输入邮箱">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">性别</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+                <nz-radio-group formControlName="sex">
+                    <label nz-radio
+                           nzValue="man">男</label>
+                    <label nz-radio
+                           nzValue="woman">女</label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">生日</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+                <nz-date-picker formControlName="birth"></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nzAlign="middle">
+            <nz-form-label [nzSpan]="8">头像</nz-form-label>
+            <nz-form-control [nzSpan]="8">
+                <input type="file"
+                       id="input-upload-file"
+                       (input)="fileChanged($event)"
+                       multiple="true"
+                       formControlName="avatar">
+                <label for="input-upload-file">
+                    <nz-avatar nzIcon="user"
+                               [nzSrc]="avatarImageUrl && avatarImageUrl"
+                               [nzSize]="48"></nz-avatar>
+                </label>
+            </nz-form-control>
+        </nz-form-item>
+
+        <div *ngIf="failed"
+             id="register-error"
+             style="margin-bottom: 1rem;">
+            <p nz-typography
+               nzType="danger"> Failed to register! </p>
+            <nz-collapse>
+                <nz-collapse-panel nzHeader="Show Failed detail">
+                    <p style="margin:0"
+                       nz-typography
+                       nzType="danger">
+                        {{ failedMas }}
+                    </p>
+                </nz-collapse-panel>
+            </nz-collapse>
+        </div>
+
+        <div nz-row>
+            <div nz-col [nzSpan]="8"></div>
+            <div nz-col [nzSpan]="16">
+                <a style="width: 100%;" nz-button
+               nzType="primary"
+               (click)="onSubmit()">注册</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>

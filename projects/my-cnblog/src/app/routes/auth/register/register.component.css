@@ -1,0 +1,11 @@
+form {
+    max-width: 50%;
+    margin: auto;
+}
+form h1 {
+    text-align: center;
+}
+
+#input-upload-file{
+    display: none;
+}

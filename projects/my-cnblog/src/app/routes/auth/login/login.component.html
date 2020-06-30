@@ -1,0 +1,67 @@
+<div class="login-form-container box-shadow">
+    <div id="login-avatar">
+        <nz-avatar [nzSize]="64"
+                   nzIcon="user"></nz-avatar>
+    </div>
+    <form [formGroup]="loginForm">
+        <nz-form-item>
+            <nz-form-control>
+                <nz-input-group nzPrefixIcon="user">
+                    <input nz-input
+                           formControlName="userName"
+                           name="userName"
+                           type="text"
+                           id="userName"
+                           placeholder="用户名">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control>
+                <nz-input-group nzPrefixIcon="lock">
+                    <input nz-input
+                           formControlName="password"
+                           name="password"
+                           type="password"
+                           id="password"
+                           placeholder="密码">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <div>
+                <label nz-checkbox
+                       formControlName="rememberMe">
+                    <span class="unselecteable">记住我</span>
+                </label>
+            </div>
+        </nz-form-item>
+
+        <div *ngIf="loginStatus && loginStatus.failed"
+             style="margin-bottom: 1rem;">
+            <p nz-typography
+            nzType="danger"> Failed to login! Please check your network, username and password </p>
+            <nz-collapse>
+                <nz-collapse-panel nzHeader="Show Failed detail">
+                    <p style="margin:0" nz-typography
+                    nzType="danger">
+                        {{ loginStatus.failedMsg }}
+                    </p>
+                </nz-collapse-panel>
+            </nz-collapse>
+        </div>
+
+        <div nz-row>
+            <button nz-button
+                    [nzLoading]="loginStatus.logging"
+                    (click)="login()"
+                    nz-col
+                    nzSpan="24"
+                    class="login-form-button login-form-margin"
+                    [nzType]="'primary'">登录</button>
+        </div>
+        <!-- <a> 注册账号 </a> -->
+    </form>
+</div>

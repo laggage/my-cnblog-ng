@@ -1,0 +1,15 @@
+<div id="md-container">
+    <div id="markdown-content"
+         class="rouned">
+         <textarea #textarea style="display:none;"></textarea>
+    </div>
+    <div id="preview"
+         *ngIf="editorStatus === 'preview'">
+         <!-- {{ getMarkdown() }} -->
+         <!-- <myblog-markdown [markdownData]="getMarkdown()"></myblog-markdown>
+         <div id="close-btn"
+              (click)="closePreview()">
+              <mat-icon svgIcon="close"></mat-icon>
+         </div> -->
+    </div>
+</div>

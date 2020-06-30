@@ -1,0 +1,6 @@
+:host {
+    width: var(--main-width);
+    display: block;
+    align-items: center;
+
+}

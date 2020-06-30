@@ -1,0 +1,125 @@
+<form [formGroup]="postForm">
+    <nz-form-item nzAlign="middle">
+        <nz-form-label nzRequired
+                       [nzSpan]="labelSpan"
+                       nzfor="postTitle">
+            标题
+        </nz-form-label>
+        <nz-form-control>
+            <input [nzSize]="'large'"
+                   type="text"
+                   placeholder="Post title"
+                   id="postTitle"
+                   name="postTitle"
+                   formControlName="title"
+                   nz-input>
+        </nz-form-control>
+    </nz-form-item>
+    <!-- 描述 -->
+    <nz-form-item>
+        <nz-form-label nzfor="postDesc"
+                       [nzSpan]="labelSpan">
+            描述
+        </nz-form-label>
+        <nz-form-control>
+            <textarea type="text"
+                      placeholder="Post description"
+                      formControlName="description"
+                      id="postDesc"
+                      name="postDesc"
+                      nz-input value=""
+                      [nzAutosize]="{ minRows: 5, maxRows: 5 }">
+                </textarea>
+        </nz-form-control>
+    </nz-form-item>
+    <!-- markdown 编辑器 -->
+    <nz-form-item>
+        <nz-form-label nzfor="postBody"
+                       [nzSpan]="labelSpan"
+                       nzRequired>
+            正文
+        </nz-form-label>
+        <nz-form-control [nzSpan]="24-labelSpan">
+            <md-editor [(markdownData)]="markdownData"></md-editor>
+        </nz-form-control>
+    </nz-form-item>
+
+    <!-- 显示标签 -->
+    <div nz-row
+         class="mb-1">
+        <div nz-col
+             [nzOffset]="labelSpan">
+            <nz-tag (nzOnClose)="removeTag(tag)"
+                    nzMode="closeable"
+                    *ngFor="let tag of tags"
+                    [nzColor]="tag.tagColor"> {{ tag.name }} </nz-tag>
+        </div>
+    </div>
+    <!-- 标签输入 -->
+    <nz-form-item>
+        <nz-form-label nzfor="postBody"
+                       [nzSpan]="labelSpan">
+            标签
+        </nz-form-label>
+        <nz-form-control [nzSpan]="8">
+            <div nz-row
+                 nzGutter="16">
+                <div nz-col>
+                    <input type="text"
+                           #tagName
+                           nz-input>
+                </div>
+                <div nz-col>
+                    <nz-form-control>
+                        <button nz-button
+                                nzType="default"
+                                (click)="addTag(tagName.value);tagName.value=''">添加</button>
+                    </nz-form-control>
+                </div>
+            </div>
+        </nz-form-control>
+    </nz-form-item>
+
+    <!-- 是否公开 -->
+    <nz-form-item>
+        <nz-form-label [nzSpan]="labelSpan">
+            是否公开
+        </nz-form-label>
+        <nz-form-control>
+            <label nz-checkbox
+                   type="checkbox"
+                   formControlName="isPublic"></label>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="labelSpan">
+            是否置顶
+        </nz-form-label>
+        <nz-form-control>
+            <label nz-checkbox
+                   type="checkbox"
+                   formControlName="isTopMost"></label>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="labelSpan">
+            置顶序号
+        </nz-form-label>
+        <nz-form-control>
+            <nz-input-number formControlName="topMostOrder"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+
+    <div nz-row>
+        <div nz-col
+             [nzOffset]="labelSpan"
+             nzSpan="8">
+            <button nz-button
+                    class="w-100"
+                    nzType="primary"
+                    (click)="onSubmit()">提交</button>
+        </div>
+    </div>
+</form>

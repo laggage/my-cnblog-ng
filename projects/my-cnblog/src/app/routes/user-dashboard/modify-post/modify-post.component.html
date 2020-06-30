@@ -1,0 +1,23 @@
+<div>
+    <div *ngIf="post"
+         nz-row>
+        <div nz-col
+             nzOffset="2"
+             class="mb-1">
+            <h2> 编辑: <a [routerLink]="'/blog/'+post.blog.id+'/posts/'+post.id">{{ post.title }}</a> </h2>
+        </div>
+
+        <div nz-col
+             nzSpan="24"
+             [class.spin-mask-wrapper]="updating">
+            <app-post-editor (submitted)="updatePost($event)"
+                             [post]="post"></app-post-editor>
+            <div class="spin-mask" *ngIf="updating">
+                <nz-spin nzSimple
+                         [nzSize]="'large'"
+                         nzTip="正在上传数据...">
+                </nz-spin>
+            </div>
+        </div>
+    </div>
+</div>
