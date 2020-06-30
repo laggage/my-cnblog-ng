@@ -1,3 +1,5 @@
+@import "assets/markdown/github-markdown.css";
+
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'iconfont';
@@ -106,5 +108,18 @@
 
     100% {
         background-position: -1000px 0;
+    }
+}
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
     }
 }

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { PostService } from '../../../core/services/post.service';
-import { Posts, Post } from '../../../models/post';
+import { Posts } from '../../../models/post';
 import { PaginationInfo } from '../../../models/pagination-info';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BlogService } from '../../../core/services/blog.service';
 
 @Component({
   selector: 'app-posts',

@@ -20,7 +20,7 @@ export class BlogLayoutSidebarComponent implements OnInit {
   constructor(
     private blogServ: BlogLayoutService
   ) {
-    blogServ.blogObserver.subscribe(x => {
+    blogServ.blogSubject.subscribe(x => {
       if (x instanceof Blog) {
         this.blog = x;
         this.calBlogAge();

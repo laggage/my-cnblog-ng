@@ -7,13 +7,13 @@ import { Blog } from '../../../models/blog';
   templateUrl: './blog-layout-header.component.html',
   styleUrls: ['./blog-layout-header.component.css']
 })
-export class BlogLayoutHeaderComponent implements OnInit {
+export class BlogLayoutHeaderComponent {
   blog: Blog;
 
   constructor(
     blogLayoutServ: BlogLayoutService
   ) {
-    blogLayoutServ.blogObserver.subscribe(
+    blogLayoutServ.blogSubject.subscribe(
       b => {
         if (b instanceof Blog) {
           this.blog = b;
@@ -21,8 +21,4 @@ export class BlogLayoutHeaderComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit(): void {
-  }
-
 }

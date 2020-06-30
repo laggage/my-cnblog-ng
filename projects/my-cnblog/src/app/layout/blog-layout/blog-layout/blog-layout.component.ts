@@ -21,7 +21,7 @@ export class BlogLayoutComponent implements OnInit {
     ).subscribe(x => {
       const blogId = x.snapshot.paramMap.get('blogId');
       if (blogId) {
-        console.log('load blog');
+        // console.log('load blog');
         blogServ.loadBlog(Number.parseInt(blogId, null));
       }
     });

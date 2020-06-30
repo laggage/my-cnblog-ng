@@ -35,8 +35,9 @@
             </div>
         </div>
 
-        <div class="post-body mb-1">
-            {{postContent}}
+        <div class="post-body mb-1" class="markdown-body">
+            <markdown lineNumbers [data]="postContent">
+            </markdown>
         </div>
     </div>
 </div>

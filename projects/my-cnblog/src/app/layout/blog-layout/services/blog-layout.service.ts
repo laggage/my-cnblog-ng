@@ -6,8 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class BlogLayoutService {
-  private blogSubject = new Subject<Blog | HttpErrorResponse>();
-  blogObserver: Observable<Blog | HttpErrorResponse> = this.blogSubject.asObservable();
+  blogSubject = new Subject<Blog | HttpErrorResponse>();
   private blog: Blog;
 
   constructor(
