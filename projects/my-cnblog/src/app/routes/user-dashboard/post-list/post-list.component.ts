@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Posts, Post } from '../../../models/post';
 import { PostService } from '../../../core/services/post.service';
 import { PaginationInfo } from '../../../models/pagination-info';
@@ -18,14 +18,15 @@ export class PostListComponent implements OnInit {
   posts: Posts = [];
   pageInfo: PaginationInfo = new PaginationInfo();
   user: BlogUser;
-  isloading = false;
+  isloading = true;
 
   constructor(
     private postserv: PostService,
     private userServ: UserService,
     private router: Router,
     private modalServ: NzModalService,
-    private authServ: AuthService
+    private authServ: AuthService,
+    private ref: ChangeDetectorRef
   ) {
     this.user = userServ.currentUser;
     if (!this.user) {
@@ -94,8 +95,13 @@ export class PostListComponent implements OnInit {
     });
   }
 
+  changePageIndex(index: number) {
+    this.pageInfo.pageIndex = index;
+    this.loadPosts();
+  }
+
   private onPostsLoaed(posts: Posts, paginationInfo: PaginationInfo) {
-    this.posts .push(...posts);
+    this.posts = [...posts];
     this.pageInfo.totalItemsCount = paginationInfo.totalItemsCount;
     this.pageInfo.pageCount = paginationInfo.pageCount;
     this.isloading = false;

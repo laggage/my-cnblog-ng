@@ -1,0 +1,94 @@
+<form nz-form *ngIf="user">
+    <nz-form-item>
+        <nz-form-label nzFor="username"
+                       [nzSm]="2"
+                       [nzXs]="24">
+            用户名
+        </nz-form-label>
+        <nz-form-control [nzSm]="4"
+                         [nzXs]="24">
+            <nz-input-group nzPrefixIcon="user">
+                <input type="text"
+                       nz-input
+                       name="username"
+                       [(ngModel)]="user.userName">
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzFor="username"
+                       [nzSm]="2"
+                       [nzXs]="24">
+            性别
+        </nz-form-label>
+        <nz-form-control [nzSm]="4"
+                         [nzXs]="24">
+            <nz-radio-group [(ngModel)]="user.sex"
+                            name="sex">
+                <label nz-radio
+                       [nzValue]="1">男</label>
+                <label nz-radio
+                       [nzValue]="2">女</label>
+            </nz-radio-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzFor="email"
+                       [nzSm]="2"
+                       [nzXs]="24">
+            邮箱
+        </nz-form-label>
+        <nz-form-control [nzSm]="4"
+                         [nzXs]="24">
+            <nz-input-group [nzPrefix]="prefixEmailIcon">
+                <input type="email"
+                       nz-input
+                       name="email"
+                       [(ngModel)]="user.email">
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzFor="birth"
+                       [nzSm]="2"
+                       [nzXs]="24">
+            生日
+        </nz-form-label>
+        <nz-form-control [nzSm]="4"
+                         [nzXs]="24">
+            <nz-date-picker id="birth" 
+                            [(ngModel)]="this.user.birth" name="birth"
+                            [nzDefaultPickerValue]="defaultDate"></nz-date-picker>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control [nzSm]="{span: 4, offset: 2}"
+                         [nzXs]="{span: 24, offset: 0}">
+            <button (click)="updateUser()" nz-button class="w-100">
+                确定
+            </button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+
+<ng-template #prefixEmailIcon>
+    <div>
+        <i nz-icon>
+            <svg t="1593570949311"
+                 class="icon"
+                 viewBox="0 0 1385 1024"
+                 version="1.1"
+                 xmlns="http://www.w3.org/2000/svg"
+                 p-id="1111"
+                 width="16"
+                 height="16">
+                <path d="M1181.91058813 66.16470594h-1022.11764657c-70.30588219 0-127.79294156 50.82352969-127.79294156 112.94117625v677.64705937c0 62.1176475 57.48705844 112.94117625 127.79294156 112.94117625h1022.11764657c70.30588219 0 127.79294156-50.82352969 127.79294156-112.94117625v-677.64705937c0-62.1176475-57.48705844-112.94117625-127.79294156-112.94117625z m0 225.8823525l-511.05882375 282.35294156-511.05882282-282.35294156v-112.94117625l511.05882282 282.35294156 511.05882375-282.35294156v112.94117625z"
+                      p-id="1112"></path>
+            </svg>
+        </i>
+    </div>
+</ng-template>

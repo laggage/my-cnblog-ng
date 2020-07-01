@@ -16,12 +16,16 @@ import { ModifyPostComponent } from './user-dashboard/modify-post/modify-post.co
 import { CanDeactivateGuard } from '../core/guard/can-deactivate.guard';
 import { ForbidenPageComponent } from './auth/forbiden-page/forbiden-page.component';
 import { PostListComponent } from './user-dashboard/post-list/post-list.component';
+import { AccountComponent } from './user-dashboard/account/account.component';
+import { AccountEditComponent } from './user-dashboard/account-edit/account-edit.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'app/index', pathMatch: 'full' },
   { path: '401', redirectTo: 'app.login' },
   { path: '403', component: ForbidenPageComponent },
+  { path: '500', component: ServerErrorComponent },
   {
     path: 'app',
     component: IndexComponent,
@@ -83,6 +87,14 @@ const routes: Routes = [
       {
         path: 'posts',
         component: PostListComponent
+      },
+      {
+        path: 'account',
+        component: AccountComponent
+      },
+      {
+        path: 'account/edit',
+        component: AccountEditComponent
       }
     ]
   },

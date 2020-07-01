@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { PostItemComponent } from './post-item/post-item.component';
 import { Post } from '../../models/post';
 import { PostListComponent } from './post-list/post-list.component';
-import { NzTypographyModule, NzAvatarModule, NzPaginationModule, NzGridModule, NzTagModule } from 'ng-zorro-antd';
+import { NzTypographyModule, NzAvatarModule, NzPaginationModule, NzGridModule, NzTagModule, NzSpinModule } from 'ng-zorro-antd';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core/core.module';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 
 
@@ -18,7 +19,8 @@ import { CoreModule } from '../../core/core.module';
     RouterModule,
     NzPaginationModule,
     NzGridModule,
-    NzTagModule
+    NzTagModule,
+    NzSpinModule
   ],
   exports: [
     PostItemComponent, PostListComponent, NzPaginationModule,

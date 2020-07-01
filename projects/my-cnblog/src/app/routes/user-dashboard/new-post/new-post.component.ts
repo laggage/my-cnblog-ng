@@ -72,6 +72,7 @@ export class NewPostComponent implements OnInit {
   }
 
   private onAddPostFailed(errResponse: HttpResponseBase) {
+    this.canDeactivateDirectly = true;
     if (errResponse.status === 403) {
       this.authServ.to403Page();
     } else if (errResponse.status === 401) {

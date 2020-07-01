@@ -8,4 +8,5 @@ export class Blog extends BaseModel {
     openDate: Date;
     totalPostsCount: number;
     totalCommentsCount: number;
+    totalPostedCommentsCount = 0;
 }

@@ -12,7 +12,8 @@
                     {{ blog && blog.blogger && blog.blogger.userName +'的博客' }}
                 </a> </h1>
         </div>
-        <div nz-col>
+        <div nz-col class="actions">
+            <a *ngIf="user" routerLink="/userCenter">管理</a>
             <a routerLink="/">去主站</a>
         </div>
     </div>

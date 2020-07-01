@@ -29,6 +29,7 @@ import {
   NzInputNumberModule,
   NzModalModule,
   NzSpinModule,
+  NzDividerModule,
 } from 'ng-zorro-antd';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -73,7 +74,8 @@ import { MarkdownModule } from './markdown/markdown.module';
     MarkdownModule,
     NzInputNumberModule,
     NzModalModule,
-    NzSpinModule
+    NzSpinModule,
+    NzDividerModule
   ]
 })
 export class SharedModule { }

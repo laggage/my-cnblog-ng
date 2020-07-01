@@ -12,6 +12,7 @@ export class PostListComponent implements OnInit {
   @Input() pageIndex = 1;
   @Input() pageSize = 10;
   @Input() totalItemsCount = 0;
+  @Input() loading = true;
   @Output() pageChanged = new EventEmitter<PaginationInfo>();
 
   get showPagiantion() {

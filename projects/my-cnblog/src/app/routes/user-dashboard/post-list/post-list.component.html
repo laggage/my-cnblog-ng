@@ -1,9 +1,10 @@
 <div nz-row>
     <!-- <nz-list-header>你的博文</nz-list-header> -->
     <nz-list [nzItemLayout]="'horizontal'"
-             nz-col [nzLoading]="isloading"
-             nzSpan="12" > 
-        <nz-list-item *ngFor="let post of posts" [nzNoFlex]="false">
+             nz-col
+             [nzLoading]="isloading"
+             nzSpan="12">
+        <nz-list-item *ngFor="let post of posts">
             <nz-list-item-meta>
                 <nz-list-item-meta-title>
                     <a (click)="gotoPostRead(post)"
@@ -12,13 +13,33 @@
                 <nz-list-item-meta-description>
                     {{ post.description }}
                 </nz-list-item-meta-description>
+
             </nz-list-item-meta>
-            <ul nz-list-item-actions>
-                <nz-list-item-action>
+            <div>
+                <div>
+                    <i nz-icon
+                    class="icon-font">&#xe610;</i>
+                {{ post.createDate | date:'yyyy MM-dd HH:mm' }}
+                </div>
+                
+                <div>
+                    <span>
+                        <i nz-icon class="icon-font">&#xe632; </i> {{post.viewCount}}
+                    </span>
+                    <span>
+                        <i nz-icon class="icon-font">&#xe9cb; </i> {{post.commentsCount}}
+                    </span>
+                </div>
+            </div>
+
+            <ul class="actions">
+                <li>
                     <span> <a (click)="editPost(post)"><i nz-icon
-                               class="icon-font"> &#xe609; </i> 编辑 </a> </span>
-                </nz-list-item-action>
-                <nz-list-item-action>
+                               class="icon-font"> &#xe609; </i> 
+                            <span> 编辑 </span>
+                            </a> </span>
+                </li>
+                <li>
                     <span>
                         <a (click)="confirmDelete(post)"
                            class="text-danger">
@@ -26,10 +47,15 @@
                                class="icon-font"> &#xe602; </i>
                             删除 </a>
                     </span>
-                </nz-list-item-action>
+                </li>
             </ul>
-
         </nz-list-item>
         <nz-list-empty *ngIf="posts && posts.length === 0"></nz-list-empty>
+        <nz-list-footer>
+            <nz-pagination (nzPageIndexChange)="changePageIndex($event)"
+                           [nzPageSize]="pageInfo.pageSize"
+                           [nzPageIndex]="pageInfo.pageIndex"
+                           [nzTotal]="pageInfo.totalItemsCount"></nz-pagination>
+        </nz-list-footer>
     </nz-list>
 </div>

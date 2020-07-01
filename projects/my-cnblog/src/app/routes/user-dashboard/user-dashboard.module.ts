@@ -6,11 +6,13 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { ModifyPostComponent } from './modify-post/modify-post.component';
 import { SharedModule } from '../../shared/shared.module';
 import { PostListComponent } from './post-list/post-list.component';
+import { AccountComponent } from './account/account.component';
+import { AccountEditComponent } from './account-edit/account-edit.component';
 
 
 
 @NgModule({
-  declarations: [BlogDashboardComponent, PostEditorComponent, NewPostComponent, ModifyPostComponent, PostListComponent],
+  declarations: [BlogDashboardComponent, PostEditorComponent, NewPostComponent, ModifyPostComponent, PostListComponent, AccountComponent, AccountEditComponent],
   imports: [
     CommonModule,
     SharedModule

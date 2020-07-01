@@ -1,25 +1,34 @@
-<nz-comment *ngIf="user">
+<nz-comment *ngIf="user" [class.spin-mask-wrapper]="addCommenting">
     <nz-avatar nz-comment-avatar
                nzIcon="user"
                [nzSrc]="user.avatarUrl"></nz-avatar>
     <nz-comment-content>
         <nz-form-item>
             <textarea nz-input
-                      rows="4"></textarea>
+                      rows="4"
+                      [(ngModel)]="comment"
+                      placeholder="输入评论"></textarea>
         </nz-form-item>
         <nz-form-item>
             <button nz-button
-                    nzType="primary">
+                    nzType="primary"
+                    (click)="addComment()">
                 Add Comment
             </button>
         </nz-form-item>
     </nz-comment-content>
+
+    <div class="spin-mask" *ngIf="addCommenting">
+        <nz-spin [nzSize]="'large'"></nz-spin>
+    </div>
 </nz-comment>
 
-<nz-space class="w-100" [nzDirection]="'vertical'">
+<nz-space class="w-100"
+          [nzDirection]="'vertical'"
+          *ngIf="!user">
     <nz-space-item>
-        <nz-alert *ngIf="!user" nzType="info"
-          nzMessage="登录后方可评论"></nz-alert>
+        <nz-alert nzType="info"
+                  nzMessage="登录后方可评论"></nz-alert>
     </nz-space-item>
     <nz-space-item>
         <nz-space>

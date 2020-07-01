@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogLayoutService } from '../services/blog-layout.service';
 import { Blog } from '../../../models/blog';
+import { BlogUser } from '../../../models/blog-user';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'blog-layout-header',
@@ -9,9 +11,11 @@ import { Blog } from '../../../models/blog';
 })
 export class BlogLayoutHeaderComponent {
   blog: Blog;
+  user: BlogUser;
 
   constructor(
-    blogLayoutServ: BlogLayoutService
+    blogLayoutServ: BlogLayoutService,
+    userServ: UserService
   ) {
     blogLayoutServ.blogSubject.subscribe(
       b => {
@@ -20,5 +24,11 @@ export class BlogLayoutHeaderComponent {
         }
       }
     );
+    userServ.userSubject.subscribe(x => {
+      if (x instanceof BlogUser) {
+        this.user = x;
+      }
+    });
+    userServ.getUser();
   }
 }

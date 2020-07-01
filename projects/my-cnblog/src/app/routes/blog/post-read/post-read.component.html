@@ -35,9 +35,17 @@
             </div>
         </div>
 
-        <div class="post-body mb-1" class="markdown-body">
-            <markdown lineNumbers [data]="postContent">
+        <div class="post-body mb-1 markdown-body"
+             [class.spin-mask-wrapper]="mdLoading || !postContent">
+            <markdown (ready)="mdLoaded()"
+                      lineNumbers
+                      [data]="postContent">
             </markdown>
+
+            <div *ngIf="mdLoading || !postContent"
+                 class="spin-mask">
+                <nz-spin [nzSize]="'large'"></nz-spin>
+            </div>
         </div>
     </div>
 </div>

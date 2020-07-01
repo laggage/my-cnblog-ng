@@ -6,8 +6,12 @@ import { UserService } from './services/user.service';
 import { BlogService } from './services/blog.service';
 import { CommentService } from './services/comment.service';
 import { CanDeactivateGuard } from './guard/can-deactivate.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpFailedInterceptorInterceptor } from './services/http-failed-interceptor.interceptor';
 
-
+export const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: HttpFailedInterceptorInterceptor, multi: true },
+];
 
 @NgModule({
   declarations: [],
@@ -20,7 +24,8 @@ import { CanDeactivateGuard } from './guard/can-deactivate.guard';
     BlogService,
     PostService,
     CommentService,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    httpInterceptorProviders
   ]
 })
 export class CoreModule { }

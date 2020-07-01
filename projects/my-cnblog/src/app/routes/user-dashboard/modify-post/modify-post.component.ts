@@ -8,6 +8,7 @@ import { AuthService } from '../../../core/Auth/auth.service';
 import { toHttpPatchOperations } from '../../../models/base-model';
 import { HttpResponseBase } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { PageRefreshMonitorService } from '../../../core/services/page-refresh-monitor.service';
 
 @Component({
   selector: 'app-modify-post',
@@ -32,37 +33,48 @@ export class ModifyPostComponent implements OnInit {
     private router: Router,
     private notifyServ: NzNotificationService,
     private modalServ: NzModalService,
-    private authServ: AuthService
+    private authServ: AuthService,
+    private refreshMonitor: PageRefreshMonitorService
   ) {
     // 可以指定 postId 路由到本组件, 或者不加PostId, 通过PostService传递Post数据到本组件
     this.route.paramMap.subscribe(x => {
       this.postId = Number.parseInt(x.get('postId'), null);
       if (this.postId) {
         this.loadPostFromNet();
-      } else {
+      } else { // 一定时间内既没有接收到Post数据, 也没有拿到PostId, 那么就去404
         setTimeout(() => {
-          if (!this.post) {
+          if (!this.postId && !this.post) {
             this.loadPostFailed();
             this.canDeactivateDelegate = () => true;
-            this.router.navigateByUrl('404'); // 一定时间内没有接收到Post数据, 也没有拿到PostId, 那么就去404
+            this.router.navigateByUrl('404');
           }
         }, 1000);
       }
     });
 
-    postServ.selectedPostObserver.subscribe(p => {
+    const subscriber = postServ.selectedPostSubject.subscribe(p => {
       if (p) {
         this.loadPostSuccess(p);
       } else {
         this.loadPostFailed();
       }
+      subscriber.unsubscribe();
     });
+    // 页面刷新, 页面如果被刷新, 那么就从本地存储读出postId, 提高刷新体验
+    if (this.refreshMonitor.isPageRefreshed() === true) {
+      this.postId = this.refreshMonitor.getData('postId');
+      subscriber.unsubscribe();
+      this.loadPostFromNet();
+    }
   }
 
   ngOnInit(): void {
   }
 
   private loadPostFromNet() {
+    if (!this.postId) {
+      this.loadPostFailed();
+    }
     this.postServ.getPostById(this.postId).subscribe(o => {
       if (o instanceof Post) {
         this.loadPostSuccess(o);
@@ -78,6 +90,7 @@ export class ModifyPostComponent implements OnInit {
     this.failedLoadPost = false;
     this.loadingPost = false;
     this.loadPostContent();
+    this.refreshMonitor.appendData('postId', this.post.id); // 关闭页面时, 保存当前博文id到本地存储
   }
 
   loadPostFailed() {

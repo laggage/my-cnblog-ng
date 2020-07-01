@@ -5,13 +5,14 @@ import { PostService } from '../../../core/services/post.service';
 import { Posts } from '../../../models/post';
 import { PaginationInfo } from '../../../models/pagination-info';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent {
   posts: Posts = [];
   loadingPosts = false;
   loadPostsSuccessed = false;
@@ -28,6 +29,7 @@ export class PostsComponent implements OnInit {
     route: ActivatedRoute,
     private notifyServ: NzNotificationService,
     private postServ: PostService,
+    private userServ: UserService
   ) {
     route.paramMap.subscribe(o => {
       try {
@@ -37,6 +39,8 @@ export class PostsComponent implements OnInit {
         notifyServ.error('路由参数加载失败', '');
       }
     });
+
+    this.userServ.getUser();
   }
 
   private resetLoadingStatus() {
@@ -56,23 +60,26 @@ export class PostsComponent implements OnInit {
       blogId: this.blogId
     }).subscribe(o => {
       if (!(o instanceof HttpErrorResponse)) {
-        this.posts = o.posts;
-        this.pageInfo.totalItemsCount = o.paginationInfo.totalItemsCount;
-        this.pageInfo.pageIndex = o.paginationInfo.pageIndex;
-        this.pageInfo.pageSize = o.paginationInfo.pageSize;
+        this.postsLoadedSucceed(o.posts, o.paginationInfo);
       } else {
         this.notifyServ.error('Failed to load posts data, Please see log for detail', '');
-        console.log(o);
       }
     });
+  }
+
+  postsLoadedSucceed(posts: Posts, paginationInfo: PaginationInfo) {
+    this.posts = posts;
+    this.pageInfo.totalItemsCount = paginationInfo.totalItemsCount;
+    this.pageInfo.pageIndex = paginationInfo.pageIndex;
+    this.pageInfo.pageSize = paginationInfo.pageSize;
+    this.loadingPosts = false;
+    this.loadPostsFailed = false;
+    this.loadPostsSuccessed = true;
   }
 
   pageChanged(pageInfo: PaginationInfo) {
     this.pageInfo.pageIndex = pageInfo.pageIndex;
     this.pageInfo.pageSize = pageInfo.pageSize;
+    this.loadPosts();
   }
-
-  ngOnInit(): void {
-  }
-
 }

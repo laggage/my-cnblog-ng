@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Injectable()
 export class BlogLayoutService {
   blogSubject = new Subject<Blog | HttpErrorResponse>();
-  private blog: Blog;
+  localBlog: Blog;
 
   constructor(
     private blogServ: BlogService
@@ -18,7 +18,7 @@ export class BlogLayoutService {
     this.blogServ.getById(blogId, fields).subscribe(
       x => {
         if (x instanceof Blog) {
-          this.blog = x;
+          this.localBlog = x;
         }
         this.blogSubject.next(x);
       }

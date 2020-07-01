@@ -2,4 +2,5 @@
                 (pageChanged)="onPageChanged($event)"
                 [pageIndex]="paginationInfo.pageIndex"
                 [pageSize]="paginationInfo.pageSize"
-                [totalItemsCount]="paginationInfo.totalItemsCount"></app-post-list>
+                [totalItemsCount]="paginationInfo.totalItemsCount"
+                [loading]="!posts || posts.length === 0"></app-post-list>

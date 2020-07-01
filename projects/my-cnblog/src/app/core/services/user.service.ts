@@ -6,12 +6,14 @@ import { retry, map, catchError } from 'rxjs/operators';
 import { BlogUser } from '../../models/blog-user';
 import { AuthService } from '../Auth/auth.service';
 import { Observable, Subject } from 'rxjs';
+import { toHttpPatchOperations } from '../../models/base-model';
+import { Sex } from '../../models/sex.enum';
 
 @Injectable()
 export class UserService extends RestfulServiceBase {
   userObserver: Observable<BlogUser|HttpErrorResponse>;
   currentUser: BlogUser = null;
-  private userSubject: Subject<BlogUser|HttpErrorResponse>;
+  userSubject: Subject<BlogUser|HttpErrorResponse>;
 
   constructor(
     private authServ: AuthService,
@@ -22,16 +24,26 @@ export class UserService extends RestfulServiceBase {
     this.userObserver = this.userSubject.asObservable();
   }
 
-  /**
-   * 获取登录用户实例
-   * 如果没有登录或者登录过期的, 则返回 null
-   */
-  getUser() {
+  uploadAvatar(avatarFile: File) {
+    const form = new FormData();
+    form.append('avatar', avatarFile);
+    return this.http.put(
+      `${this.baseUrl}/avatar`, form , {
+        observe: 'response',
+        headers: this.AuthorizationHeader
+      }
+    ).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+  }
+
+  getUser(refresh: boolean = false) {
     if (!this.authServ.isLogined) {
       this.currentUser = null;
       this.userSubject.next(this.currentUser);
     } else if (this.authServ.isLogined) {
-      if (this.currentUser) {
+      if (this.currentUser && !refresh) {
         this.userSubject.next(this.currentUser);
         return;
       }
@@ -52,5 +64,22 @@ export class UserService extends RestfulServiceBase {
         this.userSubject.next(x);
       });
     }
+  }
+
+  updateUser(userId: number, data: {
+    userName: string,
+    email: string,
+    birth: Date,
+    sex: Sex
+  }) {
+    console.log(data);
+    const operations = toHttpPatchOperations(data);
+    return this.http.patch(`${this.baseUrl}/${userId}`, operations, {
+      headers: this.AuthorizationHeader,
+      observe: 'response'
+    }).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
   }
 }

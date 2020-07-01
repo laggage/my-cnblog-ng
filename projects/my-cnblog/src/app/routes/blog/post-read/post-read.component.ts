@@ -18,6 +18,7 @@ export class PostReadComponent implements OnInit {
   failedLoadPost = false;
   postContent?: string;
   failedMsg = '';
+  mdLoading = true;
   private fromApp = false;
   private postId?: number;
 
@@ -66,6 +67,10 @@ export class PostReadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  mdLoaded() {
+    this.mdLoading = false;
+  }
+
   private loadPost() {
     this.postServ.getPostById(this.postId).subscribe(
       p => {
@@ -83,7 +88,6 @@ export class PostReadComponent implements OnInit {
   private loadPostContent() {
     this.postServ.getPostContent(this.post.postContentUrl).subscribe(
       content => {
-        console.log(content);
         if (typeof content === 'string') {
           this.postContent = content;
         } else {

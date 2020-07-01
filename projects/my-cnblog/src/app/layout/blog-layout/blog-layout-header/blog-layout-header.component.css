@@ -20,3 +20,7 @@ header {
 #blog-title {
     margin-bottom: 0;
 }
+
+.actions a{
+    margin-right: 8px;
+}

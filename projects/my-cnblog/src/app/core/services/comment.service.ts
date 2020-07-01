@@ -12,7 +12,7 @@ export class CommentService extends RestfulServiceBase {
     private http: HttpClient
   ) {
     super(`${environment.apiBaseUrl}${environment.endpoints.commentEndpoint}`);
-   }
+  }
 
   getComments(queryParams: {
     repliedPostId?: number,
@@ -36,6 +36,26 @@ export class CommentService extends RestfulServiceBase {
       retry(2),
       map(x => {
         return x.body.map(c => Object.assign(new PostComment(), c));
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  addComment(data: {
+    comment: string,
+    repliedPostId?: number,
+    repliededUserId?: number,
+    repliedCommentId?: number
+  }) {
+    return this.http.post<PostComment>(
+      this.baseUrl, data, {
+        observe: 'response',
+        headers: this.AuthorizationHeader
+      }
+    ).pipe(
+      retry(2),
+      map(x => {
+        return Object.assign(new PostComment(), x.body);
       }),
       catchError(this.handleError)
     );

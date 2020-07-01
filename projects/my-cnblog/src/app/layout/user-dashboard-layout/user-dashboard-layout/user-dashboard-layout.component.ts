@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from '../../../core/Auth/auth.service';
 import { UserService } from '../../../core/services/user.service';
 import { BlogUser } from '../../../models/blog-user';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,12 +15,19 @@ export class UserDashboardLayoutComponent implements OnInit {
   constructor(
     private authServ: AuthService,
     private userServ: UserService,
-    private notifyServ: NzNotificationService,
-    private router: Router
+    private router: Router,
+    private modalServ: NzModalService,
   ) {
     this.userServ.userObserver.subscribe(x => {
      if (x instanceof BlogUser) {
-      this.user = x;
+       if (this.user) {
+         this.user = null;
+         setTimeout(() => {
+          this.user = x;
+         }, 10);
+       } else {
+        this.user = x;
+       }
      } else if (!x) {
       this.router.navigateByUrl('app/index');
      }
@@ -32,7 +39,13 @@ export class UserDashboardLayoutComponent implements OnInit {
   }
 
   logout() {
-    this.authServ.logout();
-    this.userServ.getUser();
+    this.modalServ.confirm({
+      nzTitle: '确认操作',
+      nzContent: '确定要登出嘛?',
+      nzOnOk: () => {
+        this.authServ.logout();
+        this.userServ.getUser();
+      }
+    });
   }
 }

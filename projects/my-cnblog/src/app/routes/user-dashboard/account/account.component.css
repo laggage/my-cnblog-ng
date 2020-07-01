@@ -1,0 +1,23 @@
+#upload-btn {
+    position: relative;
+}
+
+#upload-btn label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.icon-man {
+    color: blue;
+}
+
+.icon-woman {
+    color: pink;
+}
+.icon-woman,
+.icon-man {
+    margin-left: 8px;
+}

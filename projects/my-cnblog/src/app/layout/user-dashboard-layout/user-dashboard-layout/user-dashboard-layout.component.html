@@ -11,14 +11,13 @@
             <li nz-menu-item
                 nzSelected="false">
                 <a [routerLink]="['/blog/'+user.blog.id+'/posts/']">
-                    <nz-avatar class="bd-white"
+                    <nz-avatar class="bd-white bg-white"
                                [nzSrc]="user && user.avatarUrl"
                                [nzSize]="48"></nz-avatar>
                 </a>
             </li>
             <li nz-menu-item
-                [nzSelected]> <a routerLinkActive
-                   routerLink="/"> 主站 </a>
+                [nzSelected]> <a routerLink="/app/index"> 主站 </a>
             </li>
             <li nz-menu-item> <a [routerLink]="['/blog/'+user.blog.id+'/posts/']"> 我的博客 </a> </li>
             <li nz-menu-item
@@ -64,17 +63,12 @@
                     nzMatchRouter>
                     <i nz-icon
                        nzType="user"></i>
-                    <a routerLink="./userInfo">个人信息</a>
+                    <a routerLink="./account">个人信息</a>
                 </li>
             </ul>
         </nz-sider>
 
         <nz-layout class="inner-layout">
-            <!-- <nz-breadcrumb>
-                <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-                <nz-breadcrumb-item>List</nz-breadcrumb-item>
-                <nz-breadcrumb-item>App</nz-breadcrumb-item>
-            </nz-breadcrumb> -->
             <nz-content>
                 <div>
                     <router-outlet></router-outlet>

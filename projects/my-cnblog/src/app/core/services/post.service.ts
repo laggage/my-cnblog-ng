@@ -29,12 +29,12 @@ export class PostService extends RestfulServiceBase {
    * TODO: 记录一下接收 text/plain 类型的数据
    */
   getPostContent(contentUrl: string) {
+    let header = this.AuthorizationHeader;
+    header = header.set('Accept', 'text/plain');
+    header = header.set('Content-Type', 'text/plain');
     return this.http.get(contentUrl, {
       observe: 'response',
-      headers: {
-        Accept: 'text/plain',
-        'Content-Type': 'text-plain'
-      },
+      headers: header,
       responseType: 'text'
     }).pipe(
       retry(2),

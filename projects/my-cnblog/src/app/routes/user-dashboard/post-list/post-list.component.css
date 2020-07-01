@@ -1,0 +1,18 @@
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-left: 16px;
+}
+
+.actions li {
+    list-style: none;
+    margin-right: 8px;
+}
+
+.actions span  a{
+    display: block;
+    align-items: center;
+}

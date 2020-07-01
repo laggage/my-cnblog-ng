@@ -8,11 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { BlogModule } from './blog/blog.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 
 @NgModule({
   declarations: [
-  PageNotFoundComponent],
+  PageNotFoundComponent,
+  ServerErrorComponent],
   imports: [
     CommonModule,
     AppMainModule,

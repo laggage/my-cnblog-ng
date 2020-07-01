@@ -1,0 +1,73 @@
+<div>
+    <nz-space *ngIf="user"
+              nzDirection="vertical">
+        <nz-space-item>
+            <div>
+                <div>
+                    <nz-avatar [nzSize]="48"
+                               [nzSrc]="newAvatarUrl || user.avatarUrl"
+                               class="mb-1"></nz-avatar>
+                    <span *ngIf="user.sex === 1">
+                        <i nz-icon
+                           nzType="man" class="icon-man"
+                           nzTheme="outline"></i>
+                    </span>
+                    <span *ngIf="user.sex === 2">
+                        <i nz-icon
+                           nzType="woman" class="icon-woman"
+                           nzTheme="outline"></i>
+                    </span>
+                </div>
+
+                <div>
+                    <input type="file"
+                           id="upload-avatar"
+                           class="d-none"
+                           (change)="avatarChanged($event)">
+                    <button nz-button
+                            id="upload-btn">
+                        <label for="upload-avatar"
+                               class="d-block">
+                        </label>
+                        上传新头像
+                    </button>
+                </div>
+            </div>
+        </nz-space-item>
+        <nz-divider></nz-divider>
+        <nz-space-item>
+            <div>
+                <span>
+                    <i nz-icon
+                       class="icon-font">&#xe62b;</i>
+                    我的用户名:
+                </span>
+                <span> {{user.userName}} </span>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <div>
+                <span> <i nz-icon
+                       class="icon-font">&#xe604;</i> 生日 </span>
+                <span> {{user.birth|date:'yyyy MM-dd'}} </span>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <div>
+                <span> <i nz-icon
+                       class="icon-font">&#xe908;</i> 邮箱 </span>
+                <span> {{user.email}} </span>
+            </div>
+        </nz-space-item>
+
+        <nz-space-item>
+            <a class="w-100"
+               nz-button
+               nz-type="default"
+               routerLink="edit">编辑</a>
+        </nz-space-item>
+    </nz-space>
+    <div *ngIf="!user"></div>
+</div>

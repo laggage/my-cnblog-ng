@@ -99,15 +99,8 @@ export class AuthService extends RestfulServiceBase {
       const accessToken = this.parseAccessToken(token.access_token);
       const iat: number = (accessToken.iat);
       const exp: number = (accessToken.exp);
-      if (!environment.production) {
-        console.log(exp, iat);
-        // console.log(exp-iat > 0);
-      }
       return exp - iat > 0;
     } catch {
-      if (!environment.production) {
-        console.log('token expired');
-      }
       return false;
     }
   }

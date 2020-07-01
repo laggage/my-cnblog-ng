@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   fileChanged(event: any) {
     if (event.srcElement.files.length > 0) {
       this.avatarFile = event.srcElement.files[0];
-      console.log(this.avatarFile);
+      // console.log(this.avatarFile);
       const reader = new FileReader();
       reader.readAsDataURL(this.avatarFile);
       reader.onload = () => {
