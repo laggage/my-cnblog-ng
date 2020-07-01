@@ -32,6 +32,7 @@ export class PostService extends RestfulServiceBase {
     let header = this.AuthorizationHeader;
     header = header.set('Accept', 'text/plain');
     header = header.set('Content-Type', 'text/plain');
+    contentUrl = contentUrl.replace(/http:\/\/localhost:\d*/, `${environment.apiBaseUrl}`);
     return this.http.get(contentUrl, {
       observe: 'response',
       headers: header,

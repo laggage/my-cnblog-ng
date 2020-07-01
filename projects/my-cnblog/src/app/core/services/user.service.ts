@@ -57,6 +57,9 @@ export class UserService extends RestfulServiceBase {
         retry(2),
         map(x => {
           this.currentUser = Object.assign(new BlogUser(), x.body);
+          if (environment.production) {
+            this.currentUser.avatarUrl = this.currentUser.avatarUrl.replace(/^http:\/\/localhost:\d*/ , `${environment.apiBaseUrl}`);
+          }
           return this.currentUser;
         }),
         catchError(this.handleError)
@@ -72,7 +75,7 @@ export class UserService extends RestfulServiceBase {
     birth: Date,
     sex: Sex
   }) {
-    console.log(data);
+    // console.log(data);
     const operations = toHttpPatchOperations(data);
     return this.http.patch(`${this.baseUrl}/${userId}`, operations, {
       headers: this.AuthorizationHeader,

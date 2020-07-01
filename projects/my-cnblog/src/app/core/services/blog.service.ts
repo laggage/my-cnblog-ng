@@ -4,6 +4,7 @@ import { environment } from 'projects/my-cnblog/src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Blog } from '../../models/blog';
+import { BlogUser } from '../../models/blog-user';
 
 @Injectable()
 export class BlogService extends RestfulServiceBase {
@@ -23,9 +24,14 @@ export class BlogService extends RestfulServiceBase {
     }).pipe(
       retry(2),
       map(x => {
-        return Object.assign(new Blog(), x.body);
+        return this.assignBlog(x.body);
       }),
       catchError(this.handleError)
     );
+  }
+
+  private assignBlog(blog: Blog) {
+    blog.blogger = Object.assign(new BlogUser(), blog.blogger);
+    return Object.assign(new Blog(), blog);
   }
 }

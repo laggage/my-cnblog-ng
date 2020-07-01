@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'projects/my-cnblog/src/environments/environment';
 
 @Injectable()
 export class HttpFailedInterceptorInterceptor implements HttpInterceptor {
@@ -18,7 +19,13 @@ export class HttpFailedInterceptorInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request).pipe(
+    let newReq = request.clone();
+    if (environment.production) {
+      newReq = request.clone({
+         url: request.url.replace(/http:\/\/localhost:\d*/, `${environment.apiBaseUrl}`)
+       });
+    }
+    return next.handle(newReq).pipe(
       tap(
         null,
         err => {
